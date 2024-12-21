@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Гра "Вгадай число"</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f9;
+      margin: 0;
+    }
+
+    .game-container {
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .result {
+      font-size: 22px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Гра "Вгадай число"</h1>
+    <p>Я загадав число від 1 до 100. Спробуй вгадати!</p>
+    <input type="number" id="userGuess" placeholder="Введи число" min="1" max="100" />
+    <button onclick="checkGuess()">Перевірити</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    // Випадкове число від 1 до 100
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const userGuess = document.getElementById('userGuess').value;
+      const message = document.getElementById('message');
+      attempts++;
+
+      // Перевірка введеного числа
+      if (userGuess == randomNumber) {
+        message.innerHTML = `Вітаємо! Ви вгадали число за ${attempts} спроб.`;
+        message.classList.add('result');
+      } else if (userGuess < randomNumber) {
+        message.innerHTML = 'Загадане число більше. Спробуйте ще раз!';
+        message.classList.remove('result');
+      } else if (userGuess > randomNumber) {
+        message.innerHTML = 'Загадане число менше. Спробуйте ще раз!';
+        message.classList.remove('result');
+      }
+    }
+  </script>
+</body>
+</html>
